@@ -14,13 +14,10 @@ const portfolios = defineCollection({
 			title: z.string(),
 			description: z.string(),
 			heroImage: image(),
-			clients: z.array(z.string()),
-			location: z.string(),
-			images: z.array(
-				z.array(image()).refine((arr) => [1, 2, 3].includes(arr.length), {
-					message: "Each sub-array must contain 1, 2, or 3 items",
-				}),
-			),
+			medium: z.string(),
+			dimensions: z.string(),
+			status: z.enum(["available", "sold", "enquire"]),
+			additionalImages: z.array(image()).optional(),
 			// Transform string to Date object
 			date: z.coerce.date(),
 			order: z.number(),
