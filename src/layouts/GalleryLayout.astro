@@ -1,0 +1,71 @@
+---
+import Contact from "@components/Contact/Contact.astro";
+import GalleryGrid from "@components/Portfolio/GalleryGrid.astro";
+import TestimonialQuote from "@components/Testimonials/TestimonialQuote.astro";
+import { Image } from "astro:assets";
+import { type getCollection } from "astro:content";
+
+import BaseLayout from "./BaseLayout.astro";
+
+import headerImage from "@images/portfolio-header-crop-min.jpg";
+
+// Fetch all collections
+const collections = await getCollection("collections", (collections) => {
+	//Filter out draft collections
+	return.collection.data.draft !== true;
+});
+---
+
+<BaseLayout
+	type="general"
+	title="Gallery"
+	description="Explore my collections of awrtwork."
+	heroImage={headerImage}
+	navStartStyle="white"
+>
+	<div class="relative h-[40svh] w-full overflow-hidden md:h-[60svh]">
+		<div class="absolute inset-0 z-10 bg-black/30"></div>
+		<Image
+			src={headerImage}
+			alt="Gallery header"
+			class="absolute inset-0 h-auto min-h-full w-full min-w-full object-cover md:hidden"
+			width={1920}
+			densities={[1.5, 2]}
+			loading="eager"
+		/>
+	</div>
+
+	<article class="mx-auto mt-12 px-4 md:mt-20 md:max-w-6xl">
+		<h1 class="h1 description mt-4 text-center uppercase">
+			Gallery
+		</h1>
+		<p class="text-center text-lg">
+			Explore collections of artwork, each with its own unique theme and story.
+		</p>
+
+		<div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {collections.map((collection) => (
+                <a href={`/collections/${collection.slug}`} class="block group">
+                    <div class="relative h-64 w-full overflow-hidden rounded-lg">
+                        <Image
+                            src={collection.data.thumbnail}
+                            alt={collection.data.title}
+                            class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            width={600}
+                            densities={[1.5, 2]}
+                        />
+                    </div>
+                    <h2 class="mt-4 text-xl font-bold text-center group-hover:underline">
+                        {collection.data.title}
+                    </h2>
+                    <p class="mt-2 text-center text-gray-600">
+                        {collection.data.description}
+                    </p>
+                </a>
+            ))}
+        </div>
+	</article>
+
+	<TestimonialQuote />
+	<Contact class="mt-12" />
+</BaseLayout>

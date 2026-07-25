@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const params = Astro.params;
+const collection = await getCollection("collections", (item) => item.slug === params.slug);
+
+if (!collection) {
+	throw new Error(`Collection not found: ${params.slug}`);
+}
+---
+
+<BaseLayout title={collection.data.title} description={collection.data.description}>
+	<section class="mx-auto max-w-6xl px-4">
+		<h1 class="text-4xl font-bold">{collection.data.title}</h1>
+		<p class="mt-4 text-lg">{collection.data.description}</p>
+
+		<div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+			{
+				collection.data.artworks.map((artwork) => (
+					<a href={`/artworks/${artwork.slug}`} class="group block">
+						<div class="relative h-64 w-full overflow-hidden rounded-lg">
+							<img
+								src={artwork.thumbnail}
+								alt={artwork.title}
+								class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+							/>
+						</div>
+						<h2 class="mt-4 text-center text-xl font-bold group-hover:underline">
+							{artwork.title}
+						</h2>
+					</a>
+				))
+			}
+		</div>
+	</section>
+</BaseLayout>
