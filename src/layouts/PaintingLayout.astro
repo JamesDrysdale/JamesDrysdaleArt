@@ -1,0 +1,104 @@
+---
+import Contact from "@components/Contact/Contact.astro";
+import TestimonialQuote from "@components/Testimonials/TestimonialQuote.astro";
+import { Image } from "astro:assets";
+import { type CollectionEntry } from "astro:content";
+
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+	painting: CollectionEntry<"paintings">;
+}
+
+import headerImage from "@images/portfolio-header-crop-min.jpg";
+
+const { painting } = Astro.props as Props;
+
+const { title, description, medium, dimensions, status, heroImage, additionalImages } =
+	painting.data;
+
+const statusLabel = {
+	available: "Available",
+	sold: "Previously sold",
+	"not for sale": "Not for sale",
+}[status];
+---
+
+<BaseLayout
+	type="general"
+	title={title}
+	description={description}
+	heroImage={heroImage}
+	navStartStyle="white"
+>
+	<div class="relative h-[40svh] w-full overflow-hidden md:h-[60svh]">
+		<div class="absolute inset-0 z-10 bg-black/30"></div>
+
+		<Image
+			src={headerImage}
+			alt="Painting header"
+			class="absolute inset-0 h-auto min-h-full w-full min-w-full object-cover"
+			width={1920}
+			densities={[1.5, 2]}
+			loading="eager"
+		/>
+	</div>
+
+	<article class="mx-auto mt-12 px-4 md:mt-20 md:max-w-6xl">
+		<h1 class="h1 description mt-4 text-center uppercase">
+			{title}
+		</h1>
+
+		<div class="mt-6 h-auto max-h-[80vh] w-full overflow-hidden">
+			<Image
+				src={heroImage}
+				alt={`${title}, ${medium}, ${dimensions}`}
+				width={1120}
+				quality="high"
+				densities={[1.5, 2]}
+				class="h-auto max-h-[80vh] w-auto object-contain"
+			/>
+		</div>
+
+		<h2
+			class="h3 text-primary-500 mt-10 flex flex-col items-center justify-center gap-x-3 gap-y-1 tracking-widest md:flex-row"
+		>
+			<div>{medium}</div>
+
+			<span class="hidden md:inline">|</span>
+
+			<span>{dimensions}</span>
+		</h2>
+
+		<p class="mt-2 text-center text-sm tracking-wide uppercase opacity-70">
+			{statusLabel}
+		</p>
+
+		<div class="description mt-6 text-center text-pretty md:text-lg">
+			<slot />
+		</div>
+
+		{
+			additionalImages && additionalImages.length > 0 && (
+				<div class="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
+					{additionalImages.map((img) => (
+						<div class="bg-base-200 flex items-center justify-center overflow-hidden">
+							<Image
+								src={img}
+								alt={`Additional view of ${title}`}
+								width={700}
+								quality="high"
+								densities={[1.5, 2]}
+								class="h-auto max-h-[60vh] w-auto max-w-full object-contain"
+							/>
+						</div>
+					))}
+				</div>
+			)
+		}
+	</article>
+
+	<TestimonialQuote />
+
+	<Contact class="mt-12" />
+</BaseLayout>

@@ -4,24 +4,44 @@ import { defineCollection, reference, z } from "astro:content";
 // Type-check frontmatter using a schema
 // portfolios
 const portfolios = defineCollection({
-	// type: "content",
+  loader: glob({
+    pattern: "**/[^_]*.{md,mdx}",
+    base: "./src/data/portfolios",
+  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      heroImage: image(),
+      medium: z.string(),
+      dimensions: z.string(),
+      status: z.enum(["available", "sold", "enquire"]),
+      additionalImages: z.array(image()).optional(),
+      date: z.coerce.date(),
+      order: z.number(),
+      draft: z.boolean().optional(),
+    }),
+});
+
+//paintings
+const paintings = defineCollection({
 	loader: glob({
 		pattern: "**/[^_]*.{md,mdx}",
-		base: "./src/data/portfolios",
+		base: "./src/data/paintings",
 	}),
 	schema: ({ image }) =>
 		z.object({
 			title: z.string(),
-			description: z.string(),
+			portfolio: reference("portfolios"),
 			heroImage: image(),
+			alt: z.string(),
+			description: z.string(),
 			medium: z.string(),
 			dimensions: z.string(),
-			status: z.enum(["available", "sold", "enquire"]),
+			price: z.string().optional(),
+			status: z.enum(["available", "sold", "not for sale"]),
 			additionalImages: z.array(image()).optional(),
-			// Transform string to Date object
-			date: z.coerce.date(),
 			order: z.number(),
-			// will be excluded from build if draft is "true"
 			draft: z.boolean().optional(),
 		}),
 });
@@ -61,6 +81,7 @@ const otherPages = defineCollection({
 
 export const collections = {
 	portfolios,
+	paintings,
 	testimonials,
 	otherPages,
 };

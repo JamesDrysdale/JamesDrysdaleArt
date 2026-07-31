@@ -1,0 +1,26 @@
+---
+// layout
+import PaintingLayout from "@layouts/PaintingLayout.astro";
+import { type InferGetStaticPropsType } from "astro";
+import { type CollectionEntry, getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+	const paintings = await getCollection("paintings", ({ data }) => {
+		// filter out draft pages
+		return data.draft !== true;
+	});
+
+	return paintings.map((painting) => ({
+		params: { slug: painting.id },
+		props: painting,
+	}));
+}
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const painting = Astro.props as Props;
+const { Content } = await render(painting);
+---
+
+<PaintingLayout painting={painting}>
+	<Content />
+</PaintingLayout>
