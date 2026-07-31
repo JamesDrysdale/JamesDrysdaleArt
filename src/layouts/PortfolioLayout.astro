@@ -28,6 +28,10 @@ const otherPortfolios = await getCollection("portfolios", (otherPortfolio) => {
 	// filter out draft pages
 	return otherPortfolio.data.draft !== true && otherPortfolio.id !== portfolio.id;
 });
+
+const paintings = await getCollection("paintings", (painting) => {
+	return painting.data.portfolio.id === portfolio.id;
+});
 ---
 
 <BaseLayout
@@ -64,7 +68,7 @@ const otherPortfolios = await getCollection("portfolios", (otherPortfolio) => {
 
 		<!-- hero image: object-contain (not cover) so every painting keeps its true proportions, -->
 		<!-- with a soft neutral background to fill any letterboxed space rather than cropping -->
-		<div class="mt-6 h-auto max-h-[50vh] w-full overflow-hidden md:max-h-[80vh]">
+		<div class="mx-auto mt-6 flex max-w-6xl justify-center overflow-hidden">
 			<Image
 				src={heroImage}
 				alt={`${title}, ${medium}, ${dimensions}`}
@@ -94,23 +98,41 @@ const otherPortfolios = await getCollection("portfolios", (otherPortfolio) => {
 			<slot />
 		</div>
 
-		<!-- optional extra shots: detail crops, in-situ/framed photos, alternate angles -->
+		<!-- optional extra artwork shots: detail crops, in-situ/framed photos, alternate angles -->
 		{
-			additionalImages && additionalImages.length > 0 && (
-				<div class="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-6 md:mt-16 md:grid-cols-2 md:gap-10">
-					{additionalImages.map((img) => (
-						<div class="bg-base-200 flex items-center justify-center overflow-hidden">
-							<Image
-								src={img}
-								alt={`Additional view of ${title}`}
-								width={700}
-								quality="high"
-								densities={[1.5, 2]}
-								class="h-auto max-h-[60vh] w-auto max-w-full object-contain"
-							/>
-						</div>
-					))}
-				</div>
+			paintings.length > 0 && (
+				<section class="mt-16">
+					<h2 class="h2 text-center">Paintings in this Collection</h2>
+
+					<p class="mt-2 mb-10 text-center text-sm opacity-70">
+						Click any painting to view its details, dimensions and availability.
+					</p>
+
+					<div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
+						{paintings.map((painting) => (
+							<a
+								href={`/painting/${painting.id}`}
+								class="group block transition-transform duration-200 hover:-translate-y-1"
+							>
+								<div class="bg-base-200 flex items-center justify-center overflow-hidden">
+									<Image
+										src={painting.data.heroImage}
+										alt={painting.data.alt}
+										width={700}
+										quality="high"
+										densities={[1.5, 2]}
+										class="h-auto max-h-[60vh] w-auto max-w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+										transition:name={`painting-image-${painting.id}`}
+									/>
+								</div>
+
+								<h3 class="group-hover:text-primary-500 mt-4 text-center text-lg tracking-wide transition-colors">
+									{painting.data.title}
+								</h3>
+							</a>
+						))}
+					</div>
+				</section>
 			)
 		}
 	</article>

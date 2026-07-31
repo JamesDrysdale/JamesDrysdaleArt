@@ -16,7 +16,12 @@ const { startStyle = "default", rest } = Astro.props as Props;
 
 <div
 	id="nav__container"
-	class="initial fixed top-0 left-0 z-30 flex w-full flex-col py-2 transition-[padding,background-color] duration-300"
+	data-start-style={startStyle}
+	class:list={[
+		"fixed top-0 left-0 z-30 flex w-full flex-col",
+		startStyle === "white" ? "py-2" : "py-0",
+		startStyle === "white" ? "initial" : "scrolled",
+	]}
 	transition:name={`nav`}
 	{...rest}
 >
@@ -70,9 +75,12 @@ const { startStyle = "default", rest } = Astro.props as Props;
 	let navCTA: HTMLElement | null;
 
 	function scrollHandler() {
-		if (navbar) {
+		if (!navbar) return;
+
+		const heroMode = navbar.dataset.startStyle === "white";
+
+		if (heroMode) {
 			if (window.scrollY > 50) {
-				// if we have scrolled down the page a bit, adjust colors
 				navbar.classList.add("scrolled");
 				navbar.classList.remove("initial");
 				navCTA?.setAttribute("data-scrolled", "true");
@@ -81,6 +89,10 @@ const { startStyle = "default", rest } = Astro.props as Props;
 				navbar.classList.remove("scrolled");
 				navCTA?.setAttribute("data-scrolled", "false");
 			}
+		} else {
+			navbar.classList.add("scrolled");
+			navbar.classList.remove("initial");
+			navCTA?.setAttribute("data-scrolled", "true");
 		}
 	}
 
@@ -92,6 +104,7 @@ const { startStyle = "default", rest } = Astro.props as Props;
 
 	// runs on initial page load
 	initNav();
+	scrollHandler();
 
 	// runs on view transitions navigation. Not needed if item has "transition:persist"
 	document.addEventListener("astro:after-swap", initNav);
@@ -104,8 +117,6 @@ const { startStyle = "default", rest } = Astro.props as Props;
 	}
 
 	#nav__container.scrolled {
-		/* @apply bg-base-50 py-0; */
-		background-color: var(--color-base-50);
-		padding-block: 0;
+		background-color: white;
 	}
 </style>
