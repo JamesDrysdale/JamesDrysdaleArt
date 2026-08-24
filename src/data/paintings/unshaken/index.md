@@ -1,12 +1,18 @@
-title: "Unshaken"
-description: "A serene owl perched under the moonlight."
-heroImage: "./image3.jpg"
+---
+title: Unshaken
+portfolio: couple-1
+heroImage: ./heroImage.jpg
+alt: The Jubilant Herald
+description: A joyful study...
+medium: Oil on linen
+dimensions: 80 × 100 cm
+price: £1250
+status: available
 additionalImages:
+  - ./image3.jpg
+  - ./image4.jpg
 
-- "./image4.jpg"
-  medium: "Oil on canvas"
-  dimensions: "24x36 inches"
-  status: "available"
-  date: "2023-01-15"
-  order: 1
-  draft: false
+order: 1
+---
+
+A longer description of the painting goes here.
