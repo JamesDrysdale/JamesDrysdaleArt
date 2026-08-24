@@ -1,16 +1,15 @@
 ---
 title: Unshaken
-portfolio: couple-1
-heroImage: ./heroImage.jpg
-alt: The Jubilant Herald
+portfolio: celestial-owls
+heroImage: ./Unshaken.jpeg
+alt: Unshaken
 description: A joyful study...
 medium: Oil on linen
 dimensions: 80 × 100 cm
 price: £1250
 status: available
 additionalImages:
-  - ./image3.jpg
-  - ./image4.jpg
+  - ./unshaken-framed.png
 
 order: 1
 ---

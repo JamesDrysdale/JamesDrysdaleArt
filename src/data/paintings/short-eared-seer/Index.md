@@ -1,16 +1,15 @@
 ---
-title: The Jubilant Herald
+title: Short Eared Seer
 portfolio: celestial-owls
-heroImage: ./the-jubilant-herald.jpeg
+heroImage: ./short-eared-seer.jpg
 alt: The Jubilant Herald
 description: A joyful study...
 medium: Oil on linen
 dimensions: 80 × 100 cm
-price: £1250
-status: available
+price: £55
+status: sold
 additionalImages:
-  - ./the-jubilant-herald-framed.png
-
+  - ./short-eared-seer-framed.png
 order: 1
 ---
 

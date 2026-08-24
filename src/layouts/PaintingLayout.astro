@@ -10,8 +10,6 @@ interface Props {
 	painting: CollectionEntry<"paintings">;
 }
 
-import headerImage from "@images/portfolio-header-crop-min.jpg";
-
 const { painting } = Astro.props as Props;
 
 const { title, description, medium, dimensions, status, heroImage, additionalImages } =
@@ -19,7 +17,7 @@ const { title, description, medium, dimensions, status, heroImage, additionalIma
 
 const statusLabel = {
 	available: "Available",
-	sold: "Previously sold",
+	sold: "Sold",
 	"not for sale": "Not for sale",
 }[status];
 ---
@@ -38,7 +36,7 @@ const statusLabel = {
 					width={1120}
 					quality="high"
 					densities={[1.5, 2]}
-					class="h-auto max-h-[80vh] w-auto object-contain"
+					class="h-auto max-h-[70vh] w-auto object-contain"
 				/>
 			</div>
 
@@ -69,9 +67,10 @@ const statusLabel = {
 									src={img}
 									alt={`Additional view of ${title}`}
 									width={700}
+									height={700}
 									quality="high"
 									densities={[1.5, 2]}
-									class="h-auto max-h-[60vh] w-auto max-w-full object-contain"
+									class="h-auto max-h-[60vh] w-auto max-w-full object-cover"
 								/>
 							</div>
 						))}
