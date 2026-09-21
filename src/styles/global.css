@@ -69,6 +69,16 @@
 		@apply focus:border-primary-400 focus-visible:border-primary-400 focus:ring-0 focus:outline-none focus-visible:outline-none;
 	}
 
+		.emailoctopus-form input[type="checkbox"] {
+			width: 20px !important;
+			height: 20px !important;
+		}
+
+				[data-form="82b4fb8a-fa50-11f0-8bc1-0fd58e56c043"].inline-container {
+					margin-left: auto !important;
+					margin-right: auto !important;
+				}
+
 	/* styles navbar links */
 	.nav__link--base {
 		@apply font-heading-1 px-4 py-2 tracking-wide uppercase transition duration-200 hover:opacity-80;

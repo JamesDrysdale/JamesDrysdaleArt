@@ -6,6 +6,7 @@
 
 import TestimonialCard from "@components/TestimonialCard/TestimonialCard.astro";
 import { getCollection } from "astro:content";
+import Button from "@components/Button/Button.astro";
 
 const testimonials = await getCollection("testimonials");
 
@@ -22,13 +23,21 @@ const sortedTestimonials = testimonials.sort((a, b) => {
 const firstThreeTestimonials = sortedTestimonials.slice(0, 3);
 ---
 
-<section id="testimonial" class="site-container scroll-mt-10 py-8 md:py-12">
-	<div class="mx-auto max-w-6xl text-center">
-		<h2 class="h2 text-pretty uppercase">Testimonials from my clients</h2>
+<section id='testimonial' class='site-container scroll-mt-10 py-8 md:py-12'>
+	<div class='mx-auto max-w-6xl text-center'>
+		<h2 class='h2 text-pretty uppercase'>Bring a place, memory or companion to life in paint</h2>
+		<p class='mt-4'>
+			Whether it’s a much-loved landscape, a meaningful place or a beloved pet, I work closely with
+			clients to create paintings that are personal, thoughtful and made to last. Every commission
+			begins with a conversation about what matters most to you.
+		</p>
 	</div>
-	<div class="mx-auto grid max-w-md gap-20 pt-8 md:pt-12 lg:max-w-none lg:grid-cols-3">
-		<TestimonialCard testimonial={firstThreeTestimonials[0]} imagePosition="top" />
-		<TestimonialCard testimonial={firstThreeTestimonials[1]} imagePosition="bottom" />
-		<TestimonialCard testimonial={firstThreeTestimonials[2]} imagePosition="top" />
+	<div class='mx-auto grid max-w-md gap-20 pt-8 md:pt-12 lg:max-w-none lg:grid-cols-3'>
+		<TestimonialCard testimonial={firstThreeTestimonials[0]} imagePosition='top' />
+		<TestimonialCard testimonial={firstThreeTestimonials[1]} imagePosition='bottom' />
+		<TestimonialCard testimonial={firstThreeTestimonials[2]} imagePosition='top' />
+	</div>
+	<div class='mt-12 flex justify-center'>
+		<Button href='/#contact' variant='outline'>Tell me about your idea</Button>
 	</div>
 </section>
