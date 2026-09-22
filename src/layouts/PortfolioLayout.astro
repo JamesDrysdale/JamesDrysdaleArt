@@ -34,76 +34,75 @@ const paintings = await getCollection("paintings", (painting) => {
 
 <BaseLayout type='general' title={title} description={description} heroImage={heroImage}>
 	<div class='bg-base-50'>
-			<article class='mx-auto px-4 pt-28 md:max-w-6xl md:pt-32'>
-				<h1 class='h1 description mt-4 text-center uppercase'>
-					{title}
-				</h1>
+		<article class='mx-auto px-4 pt-28 md:max-w-6xl md:pt-32'>
+			<h1 class='h1 description mt-4 text-center uppercase'>
+				{title}
+			</h1>
 
-				<!-- hero image: object-contain (not cover) so every painting keeps its true proportions, -->
-				<!-- with a soft neutral background to fill any letterboxed space rather than cropping -->
-				<div class='mx-auto mt-6 flex max-w-6xl justify-center overflow-hidden'>
-					<Image
-						src={heroImage}
-						alt={`${title}, ${medium}, ${dimensions}`}
-						width={1120}
-						quality='high'
-						densities={[1.5, 2]}
-						class='h-auto max-h-[60vh] w-auto object-contain md:max-h-[70vh]'
-						transition:name={`portfolio-image-${portfolio.id}`}
-					/>
-				</div>
+			<!-- hero image: object-contain (not cover) so every painting keeps its true proportions, -->
+			<!-- with a soft neutral background to fill any letterboxed space rather than cropping -->
+			<div class='mx-auto mt-6 flex max-w-6xl justify-center overflow-hidden'>
+				<Image
+					src={heroImage}
+					alt={`${title}, ${medium}, ${dimensions}`}
+					width={1120}
+					quality='high'
+					densities={[1.5, 2]}
+					class='h-auto max-h-[60vh] w-auto object-contain md:max-h-[70vh]'
+					transition:name={`portfolio-image-${portfolio.id}`}
+				/>
+			</div>
 
-				<!-- slot really only fuctions as a longer description -->
-				<div class='description mt-6 text-center text-pretty md:text-lg'>
-					<slot />
-				</div>
+			<!-- slot really only fuctions as a longer description -->
+			<div class='description mx-auto mt-6 max-w-3xl text-left md:text-lg [&>p+p]:mt-4'>
+				<slot />
+			</div>
 
-				<!-- optional extra artwork shots: detail crops, in-situ/framed photos, alternate angles -->
-				{
-					paintings.length > 0 && (
-						<section class='mt-16'>
-							<h2 class='h2 text-center'>Paintings in this Collection</h2>
+			<!-- optional extra artwork shots: detail crops, in-situ/framed photos, alternate angles -->
+			{
+				paintings.length > 0 && (
+					<section class='mt-16'>
+						<h2 class='h2 text-center'>Paintings in this Collection</h2>
 
-							<p class='mt-2 mb-10 text-center text-sm opacity-70'>
-								Click any painting to view its details, dimensions and availability.
-							</p>
+						<p class='mt-2 mb-10 text-center text-sm opacity-70'>
+							Click any painting to view its details, dimensions and availability.
+						</p>
 
-							<div class='mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2'>
-								{paintings.map((painting) => (
-									<a
-										href={`/painting/${painting.id}`}
-										class='group block transition-transform duration-200 hover:-translate-y-1'
-									>
-										<div class='bg-base-200 flex items-center justify-center overflow-hidden'>
-											<Image
-												src={painting.data.heroImage}
-												alt={painting.data.alt}
-												width={700}
-												quality='high'
-												densities={[1.5, 2]}
-												class='h-[700px] w-auto max-w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]'
-												transition:name={`painting-image-${painting.id}`}
-											/>
-										</div>
+						<div class='mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2'>
+							{paintings.map((painting) => (
+								<a
+									href={`/painting/${painting.id}`}
+									class='group block transition-transform duration-200 hover:-translate-y-1'
+								>
+									<div class='bg-base-200 flex items-center justify-center overflow-hidden'>
+										<Image
+											src={painting.data.heroImage}
+											alt={painting.data.alt}
+											width={700}
+											quality='high'
+											densities={[1.5, 2]}
+											class='h-[700px] w-auto max-w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]'
+											transition:name={`painting-image-${painting.id}`}
+										/>
+									</div>
 
-										<h3 class='group-hover:text-primary-500 mt-4 text-center text-lg tracking-wide transition-colors'>
-											{painting.data.title}
-										</h3>
-									</a>
-								))}
-							</div>
-						</section>
-					)
-				}
-			</article>
-
-			<TestimonialQuote />
-
-			<section class='mx-auto mt-12 px-4 md:mt-16 md:max-w-5xl'>
-				<h3 class='h2 text-center'>More Collections</h3>
-				<PortfolioGrid portfolios={otherPortfolios} noTransitions />
-			</section>
-			<Contact class='mt-12' />
+									<h3 class='group-hover:text-primary-500 mt-4 text-center text-lg tracking-wide transition-colors'>
+										{painting.data.title}
+									</h3>
+								</a>
+							))}
+						</div>
+					</section>
+				)
+			}
 		</article>
+
+		<TestimonialQuote />
+
+		<section class='mx-auto mt-12 px-4 md:mt-16 md:max-w-5xl'>
+			<h3 class='h2 text-center'>More Collections</h3>
+			<PortfolioGrid portfolios={otherPortfolios} noTransitions />
+		</section>
+		<Contact class='mt-12' />
 	</div>
 </BaseLayout>
