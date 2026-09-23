@@ -2,10 +2,10 @@
 title: The Finders Frequency
 portfolio: celestial-owls
 heroImage: ./the-finders-frequency.jpeg
-alt: The Finders Frequency
-description: A joyful study...
+alt: The Finders Frequency is an original oil painting by James Drysdale
+description: A barn owl becomes a quiet symbol of instinct, perception and finding a way through the dark.
 medium: Oil on stretched cotton canvas
-dimensions: 80 × 100 cm
+dimensions: 18 x 22"
 price: £55
 status: available
 order: 1
