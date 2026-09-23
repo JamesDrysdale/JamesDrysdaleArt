@@ -1,6 +1,5 @@
 ---
 import Contact from "@components/Contact/Contact.astro";
-import TestimonialQuote from "@components/Testimonials/TestimonialQuote.astro";
 import { Image } from "astro:assets";
 import { type CollectionEntry } from "astro:content";
 
@@ -22,55 +21,55 @@ const statusLabel = {
 }[status];
 ---
 
-<BaseLayout type="general" title={title} description={description} heroImage={heroImage}>
-	<div class="bg-base-50">
-		<article class="mx-auto px-4 pt-28 md:max-w-6xl md:pt-32">
-			<h1 class="h1 description mt-4 text-center uppercase">
+<BaseLayout type='general' title={title} description={description} heroImage={heroImage}>
+	<div class='bg-base-50'>
+		<article class='mx-auto px-4 pt-28 md:max-w-6xl md:pt-32'>
+			<h1 class='h1 description mt-4 text-center uppercase'>
 				{title}
 			</h1>
 
-			<div class="mx-auto mt-6 flex max-w-6xl justify-center overflow-hidden">
+			<div class='mx-auto mt-6 flex max-w-6xl justify-center overflow-hidden'>
 				<Image
 					src={heroImage}
 					alt={`${title}, ${medium}, ${dimensions}`}
 					width={1120}
-					quality="high"
+					quality='high'
 					densities={[1.5, 2]}
-					class="h-auto max-h-[70vh] w-auto object-contain"
+					class='h-auto max-h-[70vh] w-auto object-contain'
 				/>
 			</div>
 
 			<h2
-				class="h3 text-primary-500 mt-10 flex flex-col items-center justify-center gap-x-3 gap-y-1 tracking-widest md:flex-row"
+				class='h3 text-primary-500 mt-10 flex flex-col items-center justify-center gap-x-3 gap-y-1 tracking-widest md:flex-row'
 			>
 				<div>{medium}</div>
 
-				<span class="hidden md:inline">|</span>
+				<span class='hidden md:inline'>|</span>
 
 				<span>{dimensions}</span>
 			</h2>
 
-			<p class="mt-2 text-center text-sm tracking-wide uppercase opacity-70">
+			<p class='mt-2 text-center text-sm tracking-wide uppercase opacity-70'>
 				{statusLabel}
 			</p>
 
-			<div class="description mt-6 text-center text-pretty md:text-lg">
+			<div class='description mt-6 text-center text-pretty md:text-lg'>
 				<slot />
 			</div>
 
 			{
 				additionalImages && additionalImages.length > 0 && (
-					<div class="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
+					<div class='mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2'>
 						{additionalImages.map((img) => (
-							<div class="bg-base-200 flex items-center justify-center overflow-hidden">
+							<div class='bg-base-200 flex items-center justify-center overflow-hidden'>
 								<Image
 									src={img}
 									alt={`Additional view of ${title}`}
 									width={700}
 									height={700}
-									quality="high"
+									quality='high'
 									densities={[1.5, 2]}
-									class="h-auto max-h-[60vh] w-auto max-w-full object-cover"
+									class='h-auto max-h-[60vh] w-auto max-w-full object-cover'
 								/>
 							</div>
 						))}
@@ -79,9 +78,16 @@ const statusLabel = {
 			}
 		</article>
 
-		<TestimonialQuote />
+		<div class='mt-16 flex justify-center'>
+			<a
+				class='button button--secondary button--outline w-fit'
+				href={`/portfolio/${painting.data.portfolio.id}`}
+			>
+				← Back to collection
+			</a>
+		</div>
 
-		<Contact class="mt-12" />
-		<div class="bg-white"></div>
+		<Contact class='mt-12' />
+		<div class='bg-white'></div>
 	</div></BaseLayout
 >
