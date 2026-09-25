@@ -1,10 +1,12 @@
 ---
 title: The Liminal Grove
-description: Transform your wedding moments into lasting memories amidst California's majestic mountains.
-heroImage: ./willow-tree.jpg
-date: "Aug 5 2024"
-additionalImages: [./couple-2-min-1.jpg, ./couple-2-min-1.jpg]
+description: A collection about finding stillness, perspective and possibility among the trees.
+heroImage: ./willow-tree.jpeg
+date: "Aug 5 2025"
+
 order: 1
 ---
 
-This Malibu wedding was a breathtaking affair. The stunning mountain views provided a picturesque backdrop. The photographs beautifully captured the intimate moments, the vibrant energy, and the overall romantic ambiance of the day.
+The Liminal Grove explores the quiet power of woodland places and the sense of possibility that comes with changing light.
+
+These paintings are about the moments when stepping into nature gives us space to breathe, reflect and see things differently. The unresolved light, somewhere between sunrise and sunset, leaves room for both endings and beginnings, but the deeper thread is the renewal that can come from stillness.

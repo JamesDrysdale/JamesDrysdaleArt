@@ -1,8 +1,8 @@
 ---
 title: Celestial Owls
-description: Transform your wedding moments into lasting memories amidst California's majestic mountains.
+description: Celestial Owls brings together a series of paintings inspired by the symbolism, mystery and quiet presence of owls.
 heroImage: ./celestial-owls-vortic-exhibition.jpg
-date: "Aug 5 2024"
+date: "Dec 2024"
 additionalImages: []
 order: 2
 ---
